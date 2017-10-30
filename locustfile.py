@@ -6,17 +6,14 @@ class UserBehavior(TaskSet):
         self.login()
 
     def login(self):
-        self.client.post("/login", {"username":"ellen_key", "password":"education"})
-
-    @task(2)
-    def index(self):
-        self.client.get("/")
+        self.client.post("/api/v1/auth", {"appID":"APP_ID", "password":"123"})
 
     @task(1)
-    def profile(self):
-        self.client.get("/profile")
+    def index(self):
+        self.client.get("/api/v1/language")
 
-class WebsiteUser(HttpLocust):
+
+class NLPAPIUser(HttpLocust):
     task_set = UserBehavior
     min_wait = 5000
     max_wait = 9000
